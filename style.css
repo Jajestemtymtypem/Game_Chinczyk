@@ -1,0 +1,138 @@
+.table{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width: 97%;
+    max-width: 900px;
+    min-height: 800px;
+    margin:auto;
+   /* border: 2px solid red;*/
+}
+.table div{
+        /*border: 2px solid blue;*/
+    
+}
+.table p{
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 1px;
+    font-weight: bold;
+    font-size: 18px;
+}
+.table h2{
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 1px;
+}
+.board{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    margin-top: -20%;
+    margin-bottom: -20%;
+    width:100%;
+    padding: 2px;;
+    background-color: rgba(255, 0, 0, 0.1);
+ 
+}
+
+.colum{
+    display: grid;
+    grid-template-columns: repeat(11,1fr);
+    grid-auto-rows: 1fr;
+    gap: 11px;
+}
+.spaces{
+    min-width: 24px;
+    height: 24px;
+    background-color: rgba(255, 0, 0, 0.1);
+}
+.spacesA{
+    min-width: 24px;
+    height: 24px;
+    background-color:white;
+    border-radius:50%;
+   
+}
+.spacesRed{
+    min-width: 24px;
+    height: 24px;
+    background-color: red;
+    border-radius:50%;
+}
+.spacesBlue{
+    min-width: 24px;
+    height: 24px;
+    background-color:blue;
+    border-radius:50%;
+}
+.spacesGreen{
+     min-width: 24px;
+    height: 24px;
+    background-color:green;
+    border-radius:50%;
+}
+.spacesYellow{
+     min-width: 24px;
+    height: 24px;
+    background-color:yellow;
+    border-radius:50%;
+}
+.home{
+    margin-top: 5px;
+    min-height: 100px;
+    width:25%;
+    margin-bottom: 0;
+    padding: 0px;
+}
+
+.home div{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+.home div img{
+    margin:7px;
+    border-radius: 50%;
+    min-width: 30px;
+    
+}
+.red img{
+    background-color: red;
+}
+.blue img{
+    background-color: blue;
+}
+.green img{
+    background-color: green;
+}
+.yellow img{
+    background-color: yellow;
+}
+.controls{
+    min-height: 100px;
+    width: 40%;
+    margin-bottom: 0;
+}
+.buttons{
+    min-height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin:auto;
+    padding: 2px;
+    flex-wrap: wrap;
+}
+.buttons button{
+    margin: 10px 2px;
+}
+.scors{
+   min-height: 100px;
+    width: 40%;  
+}
