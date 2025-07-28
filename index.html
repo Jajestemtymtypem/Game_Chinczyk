@@ -8,28 +8,26 @@
 </head>
 <body>
     <div class = "table">
-        <div class = "home"><p>Red</p>
-            <div class="red">
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">
-            </div>    
+        <div class = "home"><p>Czerwony</p>
+            <div>
+            <img src="icons/dott.png" class="pionekRed" data-player = "0" data-index = "0" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekRed" data-player = "0" data-index = "1" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekRed" data-player = "0" data-index = "2" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekRed" data-player = "0" data-index = "3" onclick = "pionekKlikniety(this)">    
+            </div>  
         </div>
             <div class = "controls"><h2>Controls</h2>
                 <div class="buttons">
-                <button>coś tam  </button>
-                <button>coś tam  </button>
-                <button>coś tam  </button>
-                <button>coś tam  </button>
+                <button onclick="rzutKostka()">Rzut Kostką</button>
+                <h3><span id="gracz">Gracz</span></h3>
                 </div>
             </div>
-        <div class = "home"><p>Blue</p>
-            <div class="blue">
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png"> 
+        <div class = "home"><p>Niebieski</p>
+            <div>
+            <img src="icons/dott.png" class="pionekBlue" data-player = "1" data-index = "0" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekBlue" data-player = "1" data-index = "1" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekBlue" data-player = "1" data-index = "2" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekBlue" data-player = "1" data-index = "3" onclick = "pionekKlikniety(this)">    
             </div>
         </div>
             <div class = "board">
@@ -44,8 +42,8 @@
                     <div class="spaces"></div>
                     <div class="spaces"></div>
                     <div class="spacesA" id="8"><img src="icons/dott2.png"></div>
-                    <div class="spacesBlue" id="111"><img src="icons/dott2.png"></div>
-                    <div class="spacesA" id="9"><img src="icons/dott2.png"></div>
+                    <div class="spacesBlue" id="1111"><img src="icons/dott2.png"></div>
+                    <div class="spacesA" id="12"><img src="icons/dott2.png"></div>
                     <div class="spaces"></div>
                     <div class="spaces"></div>
                     <div class="spaces"></div>
@@ -55,7 +53,7 @@
                     <div class="spaces"></div>
                     <div class="spaces"></div>
                     <div class="spacesA" id="7"><img src="icons/dott2.png"></div>
-                    <div class="spacesBlue" id="111"><img src="icons/dott2.png"></div>
+                    <div class="spacesBlue" id="1112"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="13"><img src="icons/dott2.png"></div>
                     <div class="spaces"></div>
                     <div class="spaces"></div>
@@ -66,7 +64,7 @@
                     <div class="spaces"></div>
                     <div class="spaces"></div>
                     <div class="spacesA" id="6"><img src="icons/dott2.png"></div>
-                    <div class="spacesBlue" id="111"><img src="icons/dott2.png"></div>
+                    <div class="spacesBlue" id="1113"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="14"><img src="icons/dott2.png"></div>
                     <div class="spaces"></div>
                     <div class="spaces"></div>
@@ -77,29 +75,29 @@
                     <div class="spacesA" id="3"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="4"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="5"><img src="icons/dott2.png"></div>
-                    <div class="spacesBlue" id="111"><img src="icons/dott2.png"></div>
+                    <div class="spacesBlue" id="1114"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="15"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="16"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="17"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="18"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="19"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="40"><img src="icons/dott2.png"></div>
-                    <div class="spacesRed" id="104"><img src="icons/dott2.png"></div>
-                    <div class="spacesRed" id="104"><img src="icons/dott2.png"></div>
-                    <div class="spacesRed" id="104"><img src="icons/dott2.png"></div>
-                    <div class="spacesRed" id="104"><img src="icons/dott2.png"></div>
+                    <div class="spacesRed" id="1041"><img src="icons/dott2.png"></div>
+                    <div class="spacesRed" id="1042"><img src="icons/dott2.png"></div>
+                    <div class="spacesRed" id="1043"><img src="icons/dott2.png"></div>
+                    <div class="spacesRed" id="1044"><img src="icons/dott2.png"></div>
                     <div class="spaces"></div>
-                    <div class="spacesGreen" id="212"><img src="icons/dott2.png"></div>
-                    <div class="spacesGreen" id="212"><img src="icons/dott2.png"></div>
-                    <div class="spacesGreen" id="212"><img src="icons/dott2.png"></div>
-                    <div class="spacesGreen" id="212"><img src="icons/dott2.png"></div>
+                    <div class="spacesGreen" id="2124"><img src="icons/dott2.png"></div>
+                    <div class="spacesGreen" id="2123"><img src="icons/dott2.png"></div>
+                    <div class="spacesGreen" id="2122"><img src="icons/dott2.png"></div>
+                    <div class="spacesGreen" id="2121"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="20"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="39"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="38"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="37"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="36"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="35"><img src="icons/dott2.png"></div>
-                    <div class="spacesYellow" id="313"><img src="icons/dott2.png"></div>
+                    <div class="spacesYellow" id="3134"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="25"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="24"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="23"><img src="icons/dott2.png"></div>
@@ -110,7 +108,7 @@
                     <div class="spaces"></div>
                     <div class="spaces"></div>                    
                     <div class="spacesA" id="34"><img src="icons/dott2.png"></div>
-                    <div class="spacesYellow" id="313"><img src="icons/dott2.png"></div>
+                    <div class="spacesYellow" id="3133"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="26"><img src="icons/dott2.png"></div>
                    <div class="spaces"></div>
                    <div class="spaces"></div>
@@ -121,7 +119,7 @@
                    <div class="spaces"></div>
                    <div class="spaces"></div>
                     <div class="spacesA" id="33"><img src="icons/dott2.png"></div>
-                    <div class="spacesYellow" id="313"><img src="icons/dott2.png"></div>
+                    <div class="spacesYellow" id="3132"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="27"><img src="icons/dott2.png"></div>
                     <div class="spaces"></div>
                     <div class="spaces"></div>
@@ -132,7 +130,7 @@
                     <div class="spaces"></div>
                     <div class="spaces"></div>
                     <div class="spacesA" id="32"><img src="icons/dott2.png"></div>
-                    <div class="spacesYellow" id="313"><img src="icons/dott2.png"></div>
+                    <div class="spacesYellow" id="3131"><img src="icons/dott2.png"></div>
                     <div class="spacesA" id="28"><img src="icons/dott2.png"></div>
                     <div class="spaces"></div>
                     <div class="spaces"></div>
@@ -152,25 +150,28 @@
                 </div>             
                               
             </div>
-        <div class = "home"><p>Yellow</p>
-            <div class="yellow">
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png"> 
+        <div class = "home"><p>Żółty</p>
+            <div>
+            <img src="icons/dott.png" class="pionekYellow" data-player = "3" data-index = "0" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekYellow" data-player = "3" data-index = "1" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekYellow" data-player = "3" data-index = "2" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekYellow" data-player = "3" data-index = "3" onclick = "pionekKlikniety(this)">    
             </div>
         </div>
-            <div class = "scors"><h2>Scors</h2></div>
-        <div class = "home"><p>Green</p>
-            <div class="green">
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png">    
-            <img src="icons/dott.png"> 
-            </div>  
+            <div class = "scors"><h2>Kostka</h2>
+                <h1><span id="wynik">?</span></h1>
+            </div>
+       <div class = "home"><p>Zielony</p>
+            <div>
+            <img src="icons/dott.png" class="pionekGreen" data-player = "2" data-index = "0" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekGreen" data-player = "2" data-index = "1" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekGreen" data-player = "2" data-index = "2" onclick = "pionekKlikniety(this)">    
+            <img src="icons/dott.png" class="pionekGreen" data-player = "2" data-index = "3" onclick = "pionekKlikniety(this)">    
+            </div>
         </div>
         
     </div>
+<script src="script.js"></script>    
 </body>
 </html>
 

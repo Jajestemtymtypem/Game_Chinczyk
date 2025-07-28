@@ -1,12 +1,12 @@
 .table{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     flex-direction: row;
-    width: 97%;
+    width: 98%;
     max-width: 900px;
-    min-height: 800px;
+    min-height: 650px;
     margin:auto;
    /* border: 2px solid red;*/
 }
@@ -32,10 +32,9 @@
     justify-content: center;
     align-items: center;
     min-height: 400px;
-    margin-top: -20%;
-    margin-bottom: -20%;
+    margin-top: -3%;
     width:100%;
-    padding: 2px;;
+    padding: 5px 25px;
     background-color: rgba(255, 0, 0, 0.1);
  
 }
@@ -44,18 +43,20 @@
     display: grid;
     grid-template-columns: repeat(11,1fr);
     grid-auto-rows: 1fr;
-    gap: 11px;
+    gap: 7px;
 }
 .spaces{
     min-width: 24px;
     height: 24px;
     background-color: rgba(255, 0, 0, 0.1);
+    opacity: 30%;
 }
 .spacesA{
     min-width: 24px;
     height: 24px;
     background-color:white;
     border-radius:50%;
+    border: 2px dotted black;
    
 }
 .spacesRed{
@@ -63,24 +64,32 @@
     height: 24px;
     background-color: red;
     border-radius:50%;
+    opacity: 50%;
+    border: 2px dotted black;
 }
 .spacesBlue{
     min-width: 24px;
     height: 24px;
     background-color:blue;
     border-radius:50%;
+    opacity: 50%;
+    border: 2px dotted black;
 }
 .spacesGreen{
-     min-width: 24px;
+    min-width: 24px;
     height: 24px;
     background-color:green;
     border-radius:50%;
+    opacity: 50%;
+    border: 2px dotted black;
 }
 .spacesYellow{
-     min-width: 24px;
+    min-width: 24px;
     height: 24px;
     background-color:yellow;
     border-radius:50%;
+    opacity: 50%;
+    border: 2px dotted black;
 }
 .home{
     margin-top: 5px;
@@ -88,6 +97,7 @@
     width:25%;
     margin-bottom: 0;
     padding: 0px;
+    
 }
 
 .home div{
@@ -95,24 +105,25 @@
     justify-content: center;
     flex-wrap: wrap;
     align-items: center;
+  
 
 }
-.home div img{
-    margin:7px;
+.home img{
+    margin:5px;
     border-radius: 50%;
-    min-width: 30px;
+    min-width: 32px;
     
 }
-.red img{
+.pionekRed{
     background-color: red;
 }
-.blue img{
+.pionekBlue{
     background-color: blue;
 }
-.green img{
+.pionekGreen{
     background-color: green;
 }
-.yellow img{
+.pionekYellow{
     background-color: yellow;
 }
 .controls{
@@ -123,16 +134,31 @@
 .buttons{
     min-height: 50px;
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin:auto;
     padding: 2px;
     flex-wrap: wrap;
 }
 .buttons button{
-    margin: 10px 2px;
+    
+    margin: 5px 2px;
+    min-width: 120px;
+    min-height: 25px;
 }
 .scors{
-   min-height: 100px;
-    width: 40%;  
+    min-height: 100px;
+    width: 40%; 
+   
+}
+.scors h1{
+    text-align: center;
+    
+}
+h3{
+    font-size: 22px;
+    align-items: center;
+    margin-top: 5px;
+   
 }
