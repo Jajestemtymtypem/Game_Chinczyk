@@ -16,6 +16,18 @@ let pionki = [
     [0, 0, 0, 0], //Zielony
     [0, 0, 0, 0]  //Żółty  
 ];
+const domekStartowy = {
+  0: 41,
+  1: 101,
+  2: 201,
+  3: 301
+};
+const poleZakretu = {
+  0: 40,
+  1: 10,
+  2: 20,
+  3: 30
+};
 let wynik = [0, 0, 0, 0];
 let obecnyGracz = 0;
 let licznikSzostek = 0;
@@ -30,13 +42,14 @@ let czyMoznaRzucic = true;
 let czyRzutPoWyjsciu = false;
 
 function czyPionekMozeSieRuszyc(pozycja, wynik, pionkiGracza) {
-  if (pozycja === 0) return false; // pionek w domku
+  if (pozycja === 0) return false;
 
-  const nowaPozycja = pozycja + wynik;
+  let nowaPozycja = pozycja + wynik;
+  if (nowaPozycja > 40) nowaPozycja %= 40;
 
-  // Jeśli na docelowym polu stoi własny pionek — blokada
   return !pionkiGracza.includes(nowaPozycja);
 }
+
 
 
 
@@ -62,11 +75,17 @@ function pionekKlikniety(pionekHTML) {
   console.log(`Pozycja pionka: ${pozycja}`);
   console.log(`Ruch o: ${ostatniWynikKostki}`);
 
-  const nowaPozycja = pozycja + ostatniWynikKostki;
+  let nowaPozycja = pozycja + ostatniWynikKostki;
+
+  if (pozycja <= poleZakretu[gracz] && nowaPozycja > poleZakretu[gracz]) {
+    // Wchodzi do domku końcowego
+    const indeksWDomku = nowaPozycja - poleZakretu[gracz];
+    nowaPozycja = domekStartowy[gracz] + (indeksWDomku - 1); // np. 41 + 0
+  }
+
 
   if (czyPionekMozeSieRuszyc(pozycja, ostatniWynikKostki, pionki[gracz])) {
-    przeniesPionek(gracz, index, nowaPozycja);
-    console.log(`Gracz ${nazwaGracza[gracz]} przesuwa pionek ${index} z pola ${pozycja} na ${nowaPozycja}`);
+  przeniesPionek(gracz, index, pozycja);
   } else {
     console.log(`Pionek ${index} nie może się ruszyć z pozycji ${pozycja}`);
   }
@@ -116,15 +135,15 @@ function przetworzRzut(wynik) {
   const gracz = obecnyGracz;
   liczbaRzutowWTurze++;
 
-  if (wynik === 6 && czyMoznaWyjscZDomku(gracz)) {
-    wyjdzZDomku(gracz);
-    czyRzutPoWyjsciu = true;
-    czyMoznaRzucic = true;
-    licznikSzostek++;
-    ostatniWynikKostki = 0;
-    console.log(`Gracz ${nazwaGracza[gracz]} wychodzi z domku - rzut ${licznikSzostek}/3`);
-    return;
-  }
+ if (wynik === 6 && czyMoznaWyjscZDomku(gracz)) {
+  wyjdzZDomku(gracz);
+  czyRzutPoWyjsciu = true;
+  czyMoznaRzucic = true;
+  ostatniWynikKostki = 0;
+  console.log(`Gracz ${nazwaGracza[gracz]} wychodzi z domku - rzut ${licznikSzostek}/3`);
+  return;
+}
+
 
   const mozliwyRuch = czyJestMozliwyRuch(gracz, wynik);
 
@@ -179,16 +198,37 @@ if (!mozliwyRuch) {
     }
     return;
   }
+function przeniesPionek(gracz, index, pozycja) {
+  const zakret = poleZakretu[gracz];
+  const domekStart = domekStartowy[gracz];
 
-function przeniesPionek(gracz, index, nowaPozycja){
+  // 1. Jeśli pionek jest już w domku końcowym, nie może się ruszyć
+  if (pozycja >= domekStart && pozycja <= domekStart + 3) {
+    console.log("Pionek jest już w domku końcowym – nie może się ruszyć dalej.");
+    return;
+  }
+
+  // 2. Oblicz docelową pozycję
+  let nowaPozycja;
+  if (pozycja <= zakret && pozycja + ostatniWynikKostki > zakret) {
+    // Wejście do domku końcowego
+    const offset = pozycja + ostatniWynikKostki - zakret;
+    nowaPozycja = domekStart + offset - 1;
+  } else {
+    // Normalny ruch po planszy głównej
+    nowaPozycja = pozycja + ostatniWynikKostki;
+    if (nowaPozycja > 40) nowaPozycja -= 40;
+  }
+
+  // 3. Znajdź pionek i pole docelowe
   const pionek = document.querySelector(`img[data-player="${gracz}"][data-index="${index}"]`);
   const cel = document.getElementById(nowaPozycja);
-  if(!pionek || !cel) {
+  if (!pionek || !cel) {
     console.warn("Nie znaleziono pionka lub pola docelowego");
     return;
   }
 
-  // Sprawdź, czy ktoś już stoi na tym polu
+  // 4. Sprawdź, czy na polu docelowym ktoś stoi
   const pionekNaPolu = cel.querySelector("img[data-player]");
   if (pionekNaPolu) {
     const graczNaPolu = parseInt(pionekNaPolu.dataset.player);
@@ -201,13 +241,13 @@ function przeniesPionek(gracz, index, nowaPozycja){
       // Bijemy przeciwnika
       console.log(`Gracz ${nazwaGracza[gracz]} bije pionek gracza ${nazwaGracza[graczNaPolu]} na polu ${nowaPozycja}`);
       pionki[graczNaPolu][indexNaPolu] = 0;
-      const domek = document.querySelectorAll(".home")[graczNaPolu];
+      const domek = document.getElementById(`home-${graczNaPolu}`);
       domek.appendChild(pionekNaPolu);
       pionekNaPolu.classList.remove("active");
     }
   }
 
-  // Przeniesienie pionka
+  // 5. Przenieś pionek
   cel.appendChild(pionek);
   pionek.classList.add("active");
   pionki[gracz][index] = nowaPozycja;
@@ -216,21 +256,29 @@ function przeniesPionek(gracz, index, nowaPozycja){
 
   sprawdzWygrana(gracz);
 
-  // Sprawdzamy: czy była szóstka?
-  if (ostatniWynikKostki === 6 && licznikSzostek < 2) {
+  // 6. Obsługa szóstki – dodatkowy rzut
+  if (ostatniWynikKostki === 6) {
     licznikSzostek++;
-    console.log(`Szóstka! Gracz ${nazwaGracza[gracz]} rzuca ponownie.`);
-    czyMoznaRzucic = true;
-    ostatniWynikKostki = 0;
-    return;
+    if (licznikSzostek < 3) {
+      console.log(`Szóstka! Gracz ${nazwaGracza[gracz]} rzuca ponownie.`);
+      ostatniWynikKostki = 0;
+      czyMoznaRzucic = true;
+      czyRzutPoWyjsciu = false;
+      return;
+    } else {
+      console.log(`3 szóstki z rzędu – tura gracza ${nazwaGracza[gracz]} kończy się.`);
+    }
   }
 
-  // Koniec tury
-  ostatniWynikKostki = 0;
+  // 7. Reset stanu po ruchu i zmiana gracza
   licznikSzostek = 0;
+  ostatniWynikKostki = 0;
   czyMoznaRzucic = true;
+  czyRzutPoWyjsciu = false;
   nastepnyGracz();
 }
+
+
 
 
 function nastepnyGracz(){
@@ -270,15 +318,38 @@ function czyMoznaWyjscZDomku(gracz){
   return maWDomku && !startZajety;
 }
 
-function wyjdzZDomku(gracz){
+function wyjdzZDomku(gracz) {
   const start = poleStartowe[gracz];
   const pozycje = pionki[gracz];
 
-  for( let i = 0; i < 4; i++){
-    if(pozycje[i] === 0) {
+  for (let i = 0; i < 4; i++) {
+    if (pozycje[i] === 0) {
       const pionek = document.querySelector(`img[data-player="${gracz}"][data-index="${i}"]`);
       const pole = document.getElementById(start);
-      if(pionek && pole) {
+
+      if (pionek && pole) {
+        // Sprawdź, czy na polu startowym stoi pionek przeciwnika
+        const pionekNaPolu = pole.querySelector("img[data-player]");
+        if (pionekNaPolu) {
+          const graczNaPolu = parseInt(pionekNaPolu.dataset.player);
+          const indexNaPolu = parseInt(pionekNaPolu.dataset.index);
+
+          if (graczNaPolu === gracz) {
+            // Stoi własny pionek → nie można wyjść
+            console.log("Nie możesz wyjść, bo pole startowe jest zajęte przez Twój pionek.");
+            return;
+          } else {
+            // Stoi przeciwnik → bijemy
+            console.log(`Gracz ${nazwaGracza[gracz]} bije pionek gracza ${nazwaGracza[graczNaPolu]} przy wyjściu z domku.`);
+
+            const domekPrzeciwnika = document.getElementById(`home-${graczNaPolu}`);
+            domekPrzeciwnika.appendChild(pionekNaPolu);
+            pionekNaPolu.classList.remove("active");
+            pionki[graczNaPolu][indexNaPolu] = 0;
+          }
+        }
+
+        // Wyprowadź pionek
         pole.appendChild(pionek);
         pionek.classList.add("active");
         pionki[gracz][i] = start;
@@ -286,21 +357,31 @@ function wyjdzZDomku(gracz){
         console.log("Pozycje gracza po wyjściu:", pionki[gracz]);
         pionek.addEventListener("click", () => pionekKlikniety(pionek));
       }
-      
+
       return;
     }
   }
 }
 
-function sprawdzWygrana(gracz) {
-  const suma = pionki[gracz].reduce((a, b) => a + b, 0);
-  const wymaganeSumy = [170, 410, 810, 1210];
 
-  if (suma === wymaganeSumy[gracz]) {
+function sprawdzWygrana(gracz) {
+  const koncowe = {
+    0: [41, 42, 43, 44],
+    1: [101, 102, 103, 104],
+    2: [201, 202, 203, 204],
+    3: [301, 302, 303, 304]
+  };
+
+  const graczowe = pionki[gracz].slice().sort((a, b) => a - b);
+  const docelowe = koncowe[gracz].slice().sort((a, b) => a - b);
+
+  const wygral = graczowe.every(p => docelowe.includes(p));
+  if (wygral) {
     alert(`🎉 Gracz ${nazwaGracza[gracz]} WYGRYWA!`);
     czyMoznaRzucic = false;
   }
 }
+
 
 
 
